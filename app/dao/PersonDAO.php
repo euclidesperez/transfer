@@ -10,7 +10,7 @@ class PersonDAO extends Db{
 		$query = "INSERT INTO `transferuk`.`person`
 			(`name`,`lastName`,	`emailPerson`,	`dateRegister`,	`dateAllowOperation`,
 			`username`,	`phone`, `mobile`, `acceptTerms`, `birthDate`,
-			`address1`, `address2`, `address3`, `postalCode`, `idCountry`, `idNationality`, `idSex`)
+			`address1`, `address2`, `address3`, `postalCode`, `idCountry`, `idNationality`, `idSex`,`idStatusPersons`)
 			VALUES
 			(".$this->quote($person->getName()).", ".$this->quote($person->getLastName()).",
 			".$this->quote($person->getEmailPerson()).",".$this->quote($person->getDateRegister()).", 
@@ -20,11 +20,11 @@ class PersonDAO extends Db{
 			".$this->quote($person->getAddress1()).",".$this->quote($person->getAddress2()).",
 			".$this->quote($person->getAddress3()).", ".$this->quote($person->getPostalCode()).", 
 			".$this->quote($person->getIdCountry()).",".$this->quote($person->getIdNationality()).", 
-			".$this->quote($person->getIdSex()).")";
+			".$this->quote($person->getIdSex()).",".$this->quote($person->getIdStatusPerson()).")";
 		
 		$lastId = $this->insert($query);
 		
-		if($lastId === false){
+		if($lastId <= 0){
 			throw new Exception('An error during the register -> '.$this->error());
 		}
 		return $lastId;
@@ -102,7 +102,7 @@ class PersonDAO extends Db{
 			$object->setUsername($row['username']);
 			$object->setPhone($row['phone']);
 			$object->setMobile($row['mobile']);
-			$object->setIdStatusPerson($row['idStatusPerson']);
+			$object->setIdStatusPerson($row['idStatusPersons']);
 			$object->setAcceptTerms($row['acceptTerms']);
 			$object->setBirthDate($row['birthDate']);
 			$object->setAddress1($row['address1']);
@@ -153,7 +153,7 @@ class PersonDAO extends Db{
 			$object->setUsername($row['username']);
 			$object->setPhone($row['phone']);
 			$object->setMobile($row['mobile']);
-			$object->setIdStatusPerson($row['idStatusPerson']);
+			$object->setIdStatusPerson($row['idStatusPersons']);
 			$object->setAcceptTerms($row['acceptTerms']);
 			$object->setBirthDate($row['birthDate']);
 			$object->setAddress1($row['address1']);

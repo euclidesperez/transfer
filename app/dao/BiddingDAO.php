@@ -13,7 +13,7 @@ class BiddingDAO extends Db{
 								.$this->quote($bidding->getTotalAmountAwared()).",".$this->quote($bidding->getStatus()).")";
 		$lastId = $this->insert($query);
 		
-		if($lastId === false){			
+		if($lastId <= 0){			
 			throw new Exception('An error during the register -> '.$this->error()); 
 		}
 		return $lastId;
