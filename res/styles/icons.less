@@ -1,0 +1,74 @@
+.has-icon() {
+
+	&::before {
+		vertical-align: middle;
+		font-family: "Material-Design-Iconic-Font";
+	}
+}
+
+.has-icon(@char) {
+
+	&::before {
+		content: @char;
+	}
+}
+
+.has-icon-size(@s) {
+
+	&::before {
+		font-size: @s;
+	}
+}
+
+.has-icon-margin(@m) {
+
+	&::before {
+		margin-right: @m;
+	}
+}
+
+.has-icon-centered() {
+	position: relative;
+
+	&::before {
+		.docked;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-indent: 0;
+	}
+}
+
+//--------------
+
+body > header nav {
+
+	a {
+		.has-icon;
+		.has-icon-size(@sz3);
+
+		@media @desktop {
+			.has-icon-margin(@sp1);
+		}
+
+		@media @mobile {
+			.has-icon-centered;
+		}
+	}
+
+	.auction 			{ .has-icon("\f198"); }
+	.settings			{ .has-icon("\f1c6"); }
+	.logout				{ .has-icon("\f136"); }
+}
+
+button {
+	.has-icon;
+	.has-icon-size(@sz3);
+	.has-icon-margin(@sp1);
+
+	&.icon {
+		.has-icon-centered;
+	}
+
+	&.add				{ .has-icon("\f278"); }
+}

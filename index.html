@@ -1,0 +1,153 @@
+<!doctype html>
+<html class="view-auction">
+<head>
+	<meta charset="utf-8">
+	<title>TransferUK</title>
+	<link rel="stylesheet" href="res/styles/style.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+	<header>
+		<h1>TransferUK</h1>
+		<nav>
+			<ul>
+				<li><a class="auction" href="index.html">Subasta</a></li>
+				<li><a class="settings" href="settings.html">Configuración</a></li>
+				<li><a class="logout" href="logout.html">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+
+		<section class="summary">
+			<div class="indicator-list">
+				<div class="indicator">
+					<div class="name">Monto total</div>
+					<div class="value"><span class="unit">$</span>10.000</div>
+				</div>
+				<div class="indicator">
+					<div class="name">Monto disponible</div>
+					<div class="value"><span class="unit">$</span>6.400</div>
+				</div>
+				<div class="indicator">
+					<div class="name">Precio actual</div>
+					<div class="value"><span class="unit">Bs</span>850<span class="unit">/$</span></div>
+				</div>
+				<div class="indicator">
+					<div class="name">Fecha de cierre</div>
+					<div class="value">12/10/2016</div>
+					<div class="value secondary">05:00pm GMT+1</div>
+				</div>
+			</div>
+		</section>
+
+		<form class="dialog horizontal-dialog hilited">
+			<header>
+				<h1>Colocar orden</h1>
+			</header>
+			<section class="content">
+				<div class="field">
+					<label>Monto</label>
+					<span class="compound-input">
+						<input type="number" name="amount">
+						<span class="unit">$</span>
+					</span>
+				</div>
+				<div class="field">
+					<label>Precio</label>
+					<span class="compound-input">
+						<input type="number" name="amount">
+						<span class="unit">Bs/$</span>
+					</span>
+				</div>
+				<div class="field wide">
+					<label>Cuenta destino</label>
+					<select>
+						<option>Selecciona...</option>
+					</select>
+				</div>
+			</section>
+			<footer>
+				<button class="add">Colocar</button>
+			</footer>
+		</form>
+
+		<section class="list table-list">
+			<header>
+				<h1>Historial de operaciones</h1>
+			</header>
+			<table>
+				<thead>
+					<tr>
+						<th class="date">Fecha</th>
+						<th class="number">Monto</th>
+						<th class="number">Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+					<tr>
+						<td class="date">10/09/2016</td>
+						<td class="number">100$</td>
+						<td class="number">845Bs/$</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+
+	</main>
+	<footer>
+		<nav>
+			<ul>
+				<li><a href="#">FAQ</a></li>
+				<li><a href="#">Términos y Condiciones</a></li>
+			</ul>
+		</nav>
+		<p>&copy; 2016</p>
+	</footer>
+</body>
+</html>

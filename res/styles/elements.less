@@ -1,0 +1,91 @@
+.indicator-colors(@bg: @area-color-empty) when (luma(@bg) >= 50%) {
+
+	.hint {
+		color: @text-color-mute;
+	}
+}
+
+
+.indicator-colors(@bg) when (luma(@bg) < 50%) {
+	color: @text-color-hilite-light;
+
+	.hint {
+		color: @text-color-inv;
+	}
+}
+
+.indicator {
+	.indicator-colors;
+	text-align: center;
+
+	@media @desktop-wide {
+		font-size: 120%;
+	}
+
+	.name {
+		margin-bottom: @sp1;
+		font-size: 80%;
+	}
+
+	.value {
+		font-family: "Roboto Condensed";
+		font-size: 180%;
+		font-weight: 300;
+
+		&.secondary {
+			font-size: 100%;
+		}
+	}
+
+	.unit {
+		font-weight: inherit;
+		opacity: 0.7;
+	}
+
+	.hint {
+		margin-top: @sp1;
+		font-size: 80%;
+	}
+}
+
+.indicator-list {
+	box-sizing: border-box;
+
+	@media @desktop {
+		display: flex;
+		padding: @sp4;
+
+		.indicator {
+			flex: 1 1 auto;
+
+			+ .indicator {
+				margin-left: @sp4;
+			}
+		}
+	}
+
+	@media @mobile {
+		display: flex;
+		flex-wrap: wrap;
+
+		.indicator {
+			box-sizing: border-box;
+			flex: 0 0 auto;
+			width: 50%;
+			padding: @sp2;
+			border-bottom: 1px solid fade(@border-color, 30%);
+
+			&:nth-child(2n-1) {
+				border-right: 1px solid fade(@border-color, 30%);
+			}
+		}
+	}
+}
+
+.summary {
+	background-color: @area-color-surface;
+
+	.indicator {
+		.indicator-colors(@area-color-surface);
+	}
+}

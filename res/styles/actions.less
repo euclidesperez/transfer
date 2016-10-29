@@ -1,0 +1,53 @@
+.action-frame() {
+	padding: 0 @sp4;
+	border-radius: 2px;
+	border: 1px solid transparent;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.7);
+}
+
+.action-color(@bg) when(luma(@bg) >= 50%) {
+	background-color: @bg;
+	border-color: darken(@bg, 10%);
+	color: darken(@bg, 50%);
+}
+
+.action-color(@bg) when(luma(@bg) < 50%) {
+	background-color: @bg;
+	border-color: darken(@bg, 10%);
+	color: @text-color-inv;
+}
+
+.action-colors(@bg) {
+	.action-color(@bg);
+
+	&:focus {
+		.action-color(lighten(@bg, 10%));
+	}
+
+	&:hover {
+		.action-color(lighten(@bg, 20%));
+	}
+
+	&:active {
+		.action-color(darken(@bg, 10%));
+	}
+}
+
+.action-base() {
+	.action-frame;
+	.action-colors(@area-color-active);
+	box-sizing: border-box;
+	height: @sz5;
+	font: inherit;
+	font-size: @fn1;
+	text-transform: uppercase;
+
+	&:active {
+		transform: translateY(1px);
+	}
+}
+
+button,
+a.action {
+	.action-base;
+}

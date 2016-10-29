@@ -1,0 +1,41 @@
+.list {
+	padding: @sp2;
+
+	header {
+		.medium-header;
+
+		h1 {
+			.medium-title;
+		}
+	}
+}
+
+.table-list {
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th,
+	td {
+		padding: @sp1 @sp2;
+		text-align: left;
+
+		&.date {}
+
+		&.number {
+			text-align: right;
+		}
+	}
+
+	tbody {
+
+		tr {
+
+			&:nth-child(odd) {
+				background-color: @area-color-stripe;
+			}
+		}
+	}
+}

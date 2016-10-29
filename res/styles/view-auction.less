@@ -1,0 +1,37 @@
+.view-auction {
+
+	@media @desktop-wide {
+
+		main {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.summary,
+		.dialog {
+			box-sizing: border-box;
+			width: 50%;
+		}
+
+		.summary {
+			display: flex;
+			align-items: center;
+		}
+
+		.indicator-list {
+			width: 100%;
+		}
+
+		.dialog {
+
+			input[type="number"] {
+				width: 4em;
+			}
+		}
+
+		.list {
+			width: @breakpoint-wide;
+			margin: 0 auto;
+		}
+	}
+}

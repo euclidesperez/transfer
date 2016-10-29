@@ -49,4 +49,19 @@ class Db{
 		return "'" . $conn -> real_escape_string($value) . "'";
 	}
 	
+	protected function getCatalog($query){
+		$rows = $this->query ( $query );
+		$list = array ();
+		foreach ( $rows as $row ) {
+			$catalog = new GenericCatalog ();
+			$catalog->setIdCatalog ( $row['id'] );
+			$catalog->setDescription ( $row['description'] );
+			array_push ( $list, $catalog );
+		}
+		unset ( $row );
+		
+		return $list;
+		
+	}
+	
 }

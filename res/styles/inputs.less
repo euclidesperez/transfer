@@ -1,0 +1,40 @@
+.input-frame() {
+	box-sizing: border-box;
+	padding: @sp1;
+	border-radius: 2px;
+	border: 1px solid @border-color;
+}
+
+.input-base() {
+	.input-frame;
+	width: 100%;
+	height: @sz5;
+	font: inherit;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+	.input-base;
+}
+
+.compound-input {
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+
+	> * {
+		flex: 1 1 auto;
+	}
+
+	> span {
+		display: block;
+		flex: 0 0 auto;
+
+		min-width: 3em;
+		text-align: center;
+		color: @text-color-label;
+	}
+}

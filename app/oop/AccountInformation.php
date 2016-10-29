@@ -7,6 +7,9 @@ class AccountInformation{
 	private $numberAccount;
 	private $accountHolder;
 	private $idPerson;
+	private $address;
+	private $status;
+	private $idAccountType;
 	
 	public function getId(){
 		return $this->id;
@@ -55,6 +58,32 @@ class AccountInformation{
 	public function setIdPerson($idPerson){
 		$this->idPerson = $idPerson;
 	}
+	
+	public function getAddress(){
+		return $this->address;
+	}
+	
+	public function setAddress($address){
+		$this->address = $address;
+	}
+	
+	public function getStatus(){
+		return $this->status;
+	}
+	
+	public function setStatus($status){
+		$this->status = $status;
+	}
+	
+	public function getIdAccountType(){
+		return $this->idAccountType;
+	}
+	
+	public function setIdAccountType($idAccountType){
+		$this->idAccountType = $idAccountType;
+	}
+	
+	
 }
 
 ?>
