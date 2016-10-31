@@ -1,6 +1,6 @@
 <?php
 
-class PurchaseOrder{
+class PurchaseOrder implements JsonSerializable{
 	
 	private $id;
 	private $dateOrder;
@@ -64,6 +64,12 @@ class PurchaseOrder{
 	
 	public function setIdPerson($idPerson){
 		$this->idPerson = $idPerson;
+	}
+	
+	public function jsonSerialize() {
+		return array($this->id,$this->dateOrder,$this->amountOrder,
+				$this->statusOrder,$this->priceOrder,$this->idBidding,
+				$this->idPerson);
 	}
 }
 ?>

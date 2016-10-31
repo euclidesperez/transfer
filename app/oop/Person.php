@@ -1,6 +1,6 @@
 <?php
 
-class StatusPerson{
+class StatusPerson implements JsonSerializable{
 	
 	private $id;
 	private $statusDescriptionPerson;
@@ -20,9 +20,13 @@ class StatusPerson{
 	public function setStatusDescriptionPerson($statusDescriptionPerson){
 		$this->statusDescriptionPerson = $statusDescriptionPerson;
 	}
+	
+	public function jsonSerialize() {
+		return array($this->$id, $this->$statusDescriptionPerson);
+	}
 }
 
-class Person{
+class Person  implements JsonSerializable{
 	
 	private $id;
 	private $name;
@@ -194,6 +198,15 @@ class Person{
 	
 	public function setIdSex($idSex){
 		$this->idSex = $idSex;
+	}
+	
+	public function jsonSerialize() {
+		return array($this->id,$this->name,$this->lastName,
+				$this->emailPerson,$this->dateRegister,$this->dateAllowOperation,
+				$this->username,$this->phone,$this->mobile,$this->idStatusPerson,
+				$this->acceptTerms,$this->birthDate,$this->address1,$this->address2,
+				$this->address3,$this->postalCode,$this->idCountry,
+				$this->idNationality,$this->idSex);
 	}
 }
 ?>

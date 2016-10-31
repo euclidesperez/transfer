@@ -1,5 +1,5 @@
 <?php
-class Country{
+class Country implements JsonSerializable{
 	private $id;
 	private $countryCode;
 	private $countryName;
@@ -35,6 +35,10 @@ class Country{
 	
 	public function setStatus($status){
 		$this->status = $status;
+	}
+	
+	public function jsonSerialize() {
+		return array($this->id,$this->countryCode,$this->countryName,$this->status);
 	}
 }
 ?>

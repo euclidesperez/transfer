@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	#RewriteRule ^(.*)$ controller.php [QSA,L]
+	RewriteCond %{REQUEST_FILENAME} \.do$
+	RewriteRule ^(.*)$ controller.php [QSA,L]
+	
+	RewriteCond %{REQUEST_FILENAME} \.php$
+	RewriteRule ^(.*)$ controller.php [QSA,L]
+</IfModule>

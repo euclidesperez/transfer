@@ -1,6 +1,6 @@
 <?php
 require_once "Db.php";
-require_once "../app/oop/AccountInformation.php";
+require_once "app/oop/AccountInformation.php";
 
 class AccountInformationDAO extends Db{
 	
@@ -11,7 +11,7 @@ class AccountInformationDAO extends Db{
 			`numberAccount`,
 			`accountHolder`,
 			`address`,
-			`Person_idPerson`,
+			`idPerson`,
 			`idAccountType`)
 			VALUES
 			(".$this->quote($account->getBankName()).",
@@ -22,7 +22,7 @@ class AccountInformationDAO extends Db{
 			".$this->quote($account->getIdPerson()).",
 			".$this->quote($account->getIdAccountType()).")";
 		$lastId = $this->insert($query);
-		if($lastId === false){
+		if($lastId <= 0){
 			throw new Exception('An error during the register -> '.$this->error());
 		}
 		return $lastId;
@@ -71,7 +71,7 @@ class AccountInformationDAO extends Db{
 		$rows = $this->select($query);
 		$object = new AccountInformation();
 		foreach ($rows as $row){
-			$object->setId($row['idAccountInfomation']);
+			$object->setId($row['idAccountInformation']);
 			$object->setAccountHolder($row['accountHolder']);
 			$object->setAddress($row['address']);
 			$object->setBankName($row['bankName']);
@@ -79,6 +79,7 @@ class AccountInformationDAO extends Db{
 			$object->setIdPerson($row['idPerson']);
 			$object->setNumberAccount($row['numberAccount']);
 			$object->setIdAccountType($row['idAccountType']);
+			$object->setStatus($row['status']);
 		}		
 		unset($row);
 		return $object;
@@ -111,10 +112,16 @@ class AccountInformationDAO extends Db{
 			$object->setIdPerson($row['idPerson']);
 			$object->setNumberAccount($row['numberAccount']);
 			$object->setIdAccountType($row['idAccountType']);
+			$object->setStatus($row['status']);
 			array_push($list, $object);
 		}
 		unset($row);
 		return $list;		
+	}
+	
+	public function getStatusPersonCatalog(){
+		$query = "SELECT `accounttype`.`id`, `accounttype`.`description` FROM `transferuk`.`accounttype`";
+		return $this->getCatalog($query);
 	}
 }
 ?>

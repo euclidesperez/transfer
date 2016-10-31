@@ -1,5 +1,5 @@
 <?php
-class Document{
+class Document implements JsonSerializable{
 	private $id;
 	private $type;
 	private $idPerson;
@@ -35,6 +35,10 @@ class Document{
 	
 	public function setDocument($document){
 		$this->document = $document;
+	}
+	
+public function jsonSerialize() {
+		return array($this->id,$this->type,$this->idPerson,$this->document);
 	}
 
 }

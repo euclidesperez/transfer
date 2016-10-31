@@ -1,5 +1,5 @@
 <?php
-require_once "../app/dao/BiddingDAO.php";
+require_once "app/dao/BiddingDAO.php";
 
 
 class BiddingTest extends PHPUnit_Framework_TestCase{

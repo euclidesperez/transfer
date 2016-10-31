@@ -1,5 +1,5 @@
 <?php
-class GenericCatalog{
+class GenericCatalog implements JsonSerializable{
 	private $idCatalog;
 	private $description;
 	
@@ -17,6 +17,10 @@ class GenericCatalog{
 	
 	public function setDescription($description){
 		$this->description = $description;
+	}
+	
+	public function jsonSerialize() {
+		return array($this->idCatalog, $this->description);
 	}
 }
 ?>

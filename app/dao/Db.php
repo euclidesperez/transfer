@@ -20,7 +20,7 @@ class Db{
 	
 	protected function query($query){
 		$conn = $this->connect();
-		$result = $conn->query($query);
+		$result = $conn->query($query);		
 		return $result;
 	}
 	
@@ -33,7 +33,6 @@ class Db{
 	public function select($query){
 		$rows = array();
 		$result = $this->query($query);
-
 		while($row = $result->fetch_assoc()){
 			array_push($rows,$row);
 		}
@@ -50,16 +49,15 @@ class Db{
 	}
 	
 	protected function getCatalog($query){
-		$rows = $this->query ( $query );
-		$list = array ();
-		foreach ( $rows as $row ) {
+		$rows = $this->select( $query );
+		$list = array();
+		foreach ($rows as $row) {
 			$catalog = new GenericCatalog ();
 			$catalog->setIdCatalog ( $row['id'] );
 			$catalog->setDescription ( $row['description'] );
 			array_push ( $list, $catalog );
 		}
-		unset ( $row );
-		
+		unset ( $row );		
 		return $list;
 		
 	}

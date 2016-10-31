@@ -1,5 +1,5 @@
 <?php
-class AccountInformation{
+class AccountInformation implements JsonSerializable{
 	
 	private $id;
 	private $bankName;
@@ -83,7 +83,12 @@ class AccountInformation{
 		$this->idAccountType = $idAccountType;
 	}
 	
-	
+	public function jsonSerialize() {
+		return array($this->id,$this->bankName,$this->codeAba,
+				$this->numberAccount,$this->accountHolder,
+				$this->idPerson,$this->address,$this->status,
+				$this->idAccountType);
+	}
 }
 
 ?>

@@ -1,25 +1,23 @@
 <?php
 require_once "Db.php";
-require_once "../app/oop/PurchaseOrder.php";
+require_once "app/oop/PurchaseOrder.php";
 class PurchaseOrderDAO extends Db {
-	public function register(PurchaseOrderDAO $purchase) {
+	public function register(PurchaseOrder $purchase) {
 		$query = "INSERT INTO `transferuk`.`purchaseorder`
 			(`dateOrder`,
 			`amountOrder`,
-			`statusOrder`,
 			`priceOrder`,
-			`Bidding_idBidding`,
-			`Person_idPerson`)
+			`idBidding`,
+			`idPerson`)
 			VALUES
 			(".$this->quote($purchase->getDateOrder()).",
 			".$this->quote($purchase->getAmountOrder()).",
-			".$this->quote($purchase->getStatusOrder()).",
 			".$this->quote($purchase->getPriceOrder()).",
 			".$this->quote($purchase->getIdBidding()).",
 			".$this->quote($purchase->getIdPerson()).")";
-		$lastId = $this->insert ( $query );
+		$lastId = $this->insert( $query );
 		
-		if ($lastId === false) {
+		if ($lastId <= 0) {
 			throw new Exception ( 'An error during the register -> ' . $this->error () );
 		}
 		
@@ -34,8 +32,8 @@ class PurchaseOrderDAO extends Db {
 			`amountOrder` = ".$this->quote($purchase->getAmountOrder()).",
 			`statusOrder` = ".$this->quote($purchase->getStatusOrder()).",
 			`priceOrder` = ".$this->quote($purchase->getPriceOrder()).",
-			`Bidding_idBidding` = ".$this->quote($purchase->getIdBidding()).",
-			`Person_idPerson` = ".$this->quote($purchase->getIdPerson())."
+			`idBidding` = ".$this->quote($purchase->getIdBidding()).",
+			`idPerson` = ".$this->quote($purchase->getIdPerson())."
 			WHERE `idPurchaseOrder` = ".$this->quote($purchase->getId());
 		$result = $this->query ( $query );
 		if ($result === false) {
@@ -58,21 +56,21 @@ class PurchaseOrderDAO extends Db {
 	    	`purchaseorder`.`amountOrder`,
 	    	`purchaseorder`.`statusOrder`,
 	    	`purchaseorder`.`priceOrder`,
-	    	`purchaseorder`.`Bidding_idBidding`,
-	    	`purchaseorder`.`Person_idPerson`
+	    	`purchaseorder`.`idBidding`,
+	    	`purchaseorder`.`idPerson`
 				FROM `transferuk`.`purchaseorder`
-				WHERE `purchaseorder`.`Person_idPerson` = ".$this->quote($idPerson);
+				WHERE `purchaseorder`.`idPerson` = ".$this->quote($idPerson);
 		$rows = $this->select ( $query );
 		$listPurchaseOrder = array ();
 		foreach ( $rows as $row ) {
-			$object = new PurchaseOrderDAO ();
-			$object->setId ( $row ['idPurchaseOrder'] );
-			$object->setIdBidding ( $row ['Bidding_idBidding'] );
-			$object->setIdPerson ( $row ['Person_idPerson'] );
-			$object->setPriceOrder ( $row ['priceOrder'] );
-			$object->setDateOrder ( $row ['dateOrder'] );
-			$object->setAmountOrder ( $row ['amountOrder'] );
-			$object->setStatusOrder ( $row ['statusOrder'] );
+			$object = new PurchaseOrder();
+			$object->setId ( $row['idPurchaseOrder'] );
+			$object->setIdBidding ( $row['idBidding'] );
+			$object->setIdPerson ( $row['idPerson'] );
+			$object->setPriceOrder ( $row['priceOrder'] );
+			$object->setDateOrder ( $row['dateOrder'] );
+			$object->setAmountOrder ( $row['amountOrder'] );
+			$object->setStatusOrder ( $row['statusOrder'] );
 			array_push ( $listPurchaseOrder, $object );
 		}
 		unset ( $row );
@@ -84,16 +82,16 @@ class PurchaseOrderDAO extends Db {
 		    `purchaseorder`.`amountOrder`,
 		    `purchaseorder`.`statusOrder`,
 		    `purchaseorder`.`priceOrder`,
-		    `purchaseorder`.`Bidding_idBidding`,
-		    `purchaseorder`.`Person_idPerson`
+		    `purchaseorder`.`idBidding`,
+		    `purchaseorder`.`idPerson`
 				FROM `transferuk`.`purchaseorder`
 				WHERE `purchaseorder`.`idPurchaseOrder` = ".$this->quote($idPurchase);
 		$rows = $this->select ( $query );
-		$object = new PurchaseOrderDAO ();
+		$object = new PurchaseOrder();
 		foreach ( $rows as $row ) {
 			$object->setId ( $row ['idPurchaseOrder'] );
-			$object->setIdBidding ( $row ['Bidding_idBidding'] );
-			$object->setIdPerson ( $row ['Person_idPerson'] );
+			$object->setIdBidding ( $row ['idBidding'] );
+			$object->setIdPerson ( $row ['idPerson'] );
 			$object->setPriceOrder ( $row ['priceOrder'] );
 			$object->setDateOrder ( $row ['dateOrder'] );
 			$object->setAmountOrder ( $row ['amountOrder'] );

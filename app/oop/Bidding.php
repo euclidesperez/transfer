@@ -1,5 +1,5 @@
 <?php
-class Bidding{
+class Bidding implements JsonSerializable{
 	
 	private $id;
 	private $dateInit;
@@ -54,6 +54,10 @@ class Bidding{
 	
 	public function setStatus($status){
 		$this->status = $status;
+	}
+	
+	public function jsonSerialize() {
+		return array($this->id,$this->dateInit,$this->dateEnd,$this->totalAmountOffered,$this->totalAmountAwared,$this->status);
 	}
 }
 ?>

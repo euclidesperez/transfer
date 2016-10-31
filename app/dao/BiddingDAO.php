@@ -1,6 +1,6 @@
 <?php
 require_once "Db.php";
-require_once "../app/oop/Bidding.php";
+require_once "app/oop/Bidding.php";
 
 
 class BiddingDAO extends Db{
