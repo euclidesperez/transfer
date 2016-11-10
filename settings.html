@@ -1,0 +1,333 @@
+<!doctype html>
+<html class="view-settings">
+<head>
+	<meta charset="utf-8">
+	<title>TransferUK</title>
+	<link rel="stylesheet" href="res/styles/style.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<script src="res/scripts/lib/jquery.js"  type="text/javascript"></script>
+	<script>
+$(document).ready(function(){
+	   //register
+	   $("#userSave").click(function(event){
+		   var formData = $("#userForm").serializeArray();
+		   	$.post('registerUser.php',formData).done(
+				function(data){
+					alert(data);
+					$("#userForm").action('/');
+								
+				}).fail(function( jqXHR, textStatus, errorThrown){
+					checkFailResponse(jqXHR, textStatus, errorThrown);
+				});
+		   
+		});
+	   
+	   $("#accountSave").click(function(event){
+		   var formData = $("#accountForm").serializeArray();
+		   	$.post('registerAccount.php',formData).done(
+				function(data){
+					alert(data);
+					$("#userForm").action('/');
+								
+				}).fail(function( jqXHR, textStatus, errorThrown){
+					checkFailResponse(jqXHR, textStatus, errorThrown);
+				});
+		   
+		});
+
+	   function checkFailResponse(jqXHR, textStatus, errorThrown){
+		   if (jqXHR.status === 0) {
+
+			    alert('Not connect: Verify Network.');
+
+			  } else if (jqXHR.status == 404) {
+
+			    alert('Requested page not found [404]');
+
+			  } else if (jqXHR.status == 500) {
+
+			    alert('Internal Server Error [500].');
+
+			  } else if (textStatus === 'parsererror') {
+
+			    alert('Requested JSON parse failed.');
+
+			  } else if (textStatus === 'timeout') {
+
+			    alert('Time out error.');
+
+			  } else if (textStatus === 'abort') {
+
+			    alert('Ajax request aborted.');
+
+			  } else {
+
+			    alert('Uncaught Error: ' + jqXHR.responseText);
+
+			  }
+	   }
+	   //combo country
+	   $.get("provisioning.do?option=country").done(
+				function(data){
+					var options = $("#country");
+					$.each(JSON.parse(data), function() {
+					    options.append($("<option />").val(this[0]).text(this[2]));
+					});				
+				}).fail(function(jqXHR, textStatus, errorThrown){
+					alert('FAIL '+textStatus+' '+errorThrown);
+				});
+	   
+	   //combo nationality
+	   $.get("provisioning.do?option=country").done(
+				function(data){
+					var options = $("#nationality");
+					$.each(JSON.parse(data), function() {
+					    options.append($("<option />").val(this[0]).text(this[2]));
+					});				
+				}).fail(function(jqXHR, textStatus, errorThrown){
+					alert('FAIL '+textStatus+' '+errorThrown);
+				});
+	   
+	   //combo sexo
+	   $.get("provisioning.do?option=sex").done(
+				function(data){
+					var options = $("#sex");
+					$.each(JSON.parse(data), function() {
+					    options.append($("<option />").val(this[0]).text(this[1]));
+					});				
+				}).fail(function(jqXHR, textStatus, errorThrown){
+					alert('FAIL '+textStatus+' '+errorThrown);
+				});
+	   
+	   
+	});
+</script>
+</head>
+<body>
+	<header>
+		<h1>TransferUK</h1>
+		<nav>
+			<ul>
+				<li><a class="auction" href="index.html">Subasta</a></li>
+				<li><a class="settings" href="settings.html">Configuración</a></li>
+				<li><a class="logout" href="login.html">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<form class="dialog" id="userForm">
+			<header>
+				<h1>Perfil</h1>
+			</header>
+			<section class="content">
+				<div class="field-group">
+					<div class="field">
+						<label>Nombre</label>
+						<input type="text" name="name">
+					</div>
+					<div class="field">
+						<label>Apellido</label>
+						<input type="text" name="lastName">
+					</div>
+					<div class="field">
+						<label>Email</label>
+						<input type="email" name="username">
+					</div>
+				</div>
+				<div class="field-group"> 
+					<div>
+						<input type="radio" name="gender" value="male" checked> Male<br>
+						<input type="radio" name="gender" value="female"> Female<br>
+					</div>
+				</div>
+				<div class="field-group">
+					<div class="field">
+						<label>Fecha Nacimiento</label>
+						<input type="date" name="birthDate">
+					</div>
+					<div class="field">
+						<label>Pais</label>
+						<select
+							name="country" id="country">
+								<option value="null">Selecciona...</option>
+						</select>
+					</div>
+					<div class="field">
+						<label>Nacionalidad</label>
+						<select
+							name="country" id="nationality">
+								<option value="null">Selecciona...</option>
+						</select>
+					</div>
+				</div>
+				<div class="field-group">
+					<div class="field">
+						<label>Dieccion 1</label>
+						<input type="text" name="address1">
+					</div>
+					<div class="field">
+						<label>Direccion 2</label>
+						<input type="text" name="address2">
+					</div>
+					<div class="field">
+						<label>Direccion 3</label>
+						<input type="text" name="address3">
+					</div>
+				</div>
+				<div class="field-group">
+					<div class="field">
+						<label>Codigo Postal</label>
+						<input type="text" name="postalCode">
+					</div>
+					<div class="field">
+						<label>Telefono</label>
+						<input type="text" name="phoneNumber">
+					</div>
+					<div class="field">
+						<label>Telefono Movil</label>
+						<input type="text" name="mobileNumber">
+					</div>
+				</div>
+			</section>
+			<footer>
+				<button class="save" id="userSave">Guardar</button>
+				<button type="reset" class="cancel">Cancelar</button>
+			</footer>
+		</form>
+		<section class="list grid-list">
+			<header>
+				<h1>Documentos</h1>
+				<p></p>
+				<ul class="toolbar">
+					<li><button class="add icon" data-toggle="add-document-modal">Anexar</button></li>
+				</ul>
+			</header>
+			<div class="modal" id="add-document-modal">
+				<form class="dialog">
+					<header>
+						<h1>Anexar documento</h1>
+					</header>
+					<section class="content">
+						<div class="field-group">
+							<div class="field">
+								<label>Tipo</label>
+								<select name="type">
+									<option>Cédula</option>
+									<option>Pasaporte</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>Imagen</label>
+								<input type="file" name="file" accept="image/*,application/pdf">
+							</div>
+						</div>
+					</section>
+					<footer>
+						<button class="save" id="accountSave">Guardar</button>
+						<button type="reset" class="cancel">Cancelar</button>
+					</footer>
+				</form>
+			</div>
+			<div class="list-items">
+				<article class="document-item list-item">
+					<figure class="preview">
+						<a class="hotspot" href="#">
+							<img src="">
+						</a>
+					</figure>
+					<header>
+						<h1>Cédula</h1>
+					</header>
+					<ul class="toolbar">
+						<li><button class="delete icon" data-confirm="¿Está seguro de eliminar éste elemento?"></button></li>
+					</ul>
+				</article>
+			</div>
+		</section>
+		<section class="list table-list">
+			<header>
+				<h1>Cuentas Bancarias</h1>
+				<p></p>
+				<ul class="toolbar">
+					<li><button class="add icon" data-toggle="add-account-modal">Agregar</button></li>
+				</ul>
+			</header>
+			<div class="modal" id="add-account-modal">
+				<form class="dialog" id="accountForm">
+					<header>
+						<h1>Agregar cuenta bancaria</h1>
+					</header>
+					<section class="content">
+						<div class="field-group">
+							<div class="field">
+								<label>Banco</label>
+								<input type="text" name="name" id="bankName" autofocus>
+							</div>
+							<div class="field">
+								<label>Código ABA / Sort Code</label>
+								<input type="text" name="aba" id="codeABA">
+							</div>
+						</div>
+						<div class="field-group">
+							<div class="field">
+								<label>Número de cuenta / IBAN</label>
+								<input type="text" name="code" id="numbeAccount">
+							</div>
+							<div class="field">
+								<label>Titular de la cuenta</label>
+								<input type="text" name="owner" id="holder">
+							</div>
+						</div>
+						<div class="field-group">
+							<div class="field">
+								<label>Direccion del Titular</label>
+								<input type="text" name="address" id="address">
+							</div>
+						</div>
+					</section>
+					<footer>
+						<button class="save">Guardar</button>
+						<button type="reset" class="cancel">Cancelar</button>
+					</footer>
+				</form>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Banco</th>
+						<th class="optional number">Código ABA</th>
+						<th class="number">Cuenta</th>
+						<th class="optional">Titular</th>
+						<th class="actions"></th>
+					</tr>
+				</thead>
+				<tbody class="list-items">
+					<tr class="list-item">
+						<td>Bank of America</td>
+						<td class="optional number">123456789</td>
+						<td class="number">1234-5678-1234-5678</td>
+						<td class="optional">Emma María</td>
+						<td class="actions"><button class="delete icon">Eliminar</button></td>
+					</tr>
+					<tr class="list-item">
+						<td>Bank of America</td>
+						<td class="optional number">123456789</td>
+						<td class="number">1234-5678-1234-5678</td>
+						<td class="optional">Emma María</td>
+						<td class="actions"><button class="delete icon">Eliminar</button></td>
+					</tr>
+					<tr class="list-item">
+						<td>Bank of America</td>
+						<td class="optional number">123456789</td>
+						<td class="number">1234-5678-1234-5678</td>
+						<td class="optional">Emma María</td>
+						<td class="actions"><button class="delete icon">Eliminar</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+	<script src="res/scripts/lib/jquery.js"></script>
+	<script src="res/scripts/ui.js"></script>
+</body>
+</html>

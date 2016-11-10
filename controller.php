@@ -4,19 +4,26 @@ require_once 'app/business/delegate.php';
 
 $uri = $_SERVER ['REQUEST_URI'];
 $tipo = "application/json";
-
+header($tipo);
 if ($uri == 'controller.php') {
 	header('Location: index.html');
 	exit;
 	
 } elseif (strstr($uri, 'provisioning.do') || strstr($uri, 'provisioning.php') ) {
 	$catalog = loadCatalog($_GET);
+	
 	echo json_encode($catalog);
 	
 } elseif (strstr($uri, 'register.do') ||strstr($uri, 'register.php')) {
-	$id = userRegister($_POST);
-	var_dump($id);
-	//echo json_encode($id);
+	if(strstr(strtolower($_SERVER['REQUEST_METHOD']),'post') ){
+		$id = register($_POST,$_REQUEST['option']);
+		echo json_encode($date=['id'=> $id]);
+	}
+
+} elseif (strstr($uri, 'registerAccount.do') ||strstr($uri, 'registerAccount.php')) {
+		$id = accountRegister($_POST);
+		//syslog(LOG_WARNING,$id);
+		echo json_encode($id);
 	
 } else{
 	header ( 'Status: 404 Not Found' );
@@ -39,30 +46,14 @@ function loadCatalog($getArray){
 	
 }
 
-function userRegister($var){
+function register($postArray,$option){
 	$delegate = new Delegate();
-	return $delegate->userRegister($var);
-	
+	if(!is_null($option) && !empty($option)){
+		return $delegate->register($postArray,$option);
+	}else{
+		throw new Exception('No Operation Defined');
+	}
+		
 }
 
-function getCodEstado($codEstado) {
-	$estado = array (
-			200 => 'OK',
-			201 => 'Created',
-			202 => 'Accepted',
-			204 => 'No Content',
-			301 => 'Moved Permanently',
-			302 => 'Found',
-			303 => 'See Other',
-			304 => 'Not Modified',
-			400 => 'Bad Request',
-			401 => 'Unauthorized',
-			403 => 'Forbidden',
-			404 => 'Not Found',
-			405 => 'Method Not Allowed',
-			500 => 'Internal Server Error' 
-	);
-	$respuesta = ($codEstado) ? $estado [$codEstado] : $estado [500];
-	return $respuesta;
-}
 ?>

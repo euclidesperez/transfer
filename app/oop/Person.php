@@ -47,6 +47,9 @@ class Person  implements JsonSerializable{
 	private $idCountry;
 	private $idNationality;
 	private $idSex;
+	private $idOcupation;
+	private $idFundOrigin;
+	private $idOperationType;
 	
 	public function getId(){
 		return $this->id;
@@ -200,13 +203,41 @@ class Person  implements JsonSerializable{
 		$this->idSex = $idSex;
 	}
 	
+	public function getIdOperationType(){
+		return $this->idOperationType;
+	}
+	
+	public function setIdOperationType($idOperationType){
+		$this->idOperationType = $idOperationType;
+	}
+	
+	public function getIdOcupation(){
+		return $this->idOcupation;
+	}
+	
+	public function setIdOcupation($idOcupation){
+		$this->idOcupation = $idOcupation;
+	}
+	
+	public function getIdFundOrigin(){
+		return $this->idFundOrigin;
+	}
+	
+	public function setIdFundOrigin($idFundOrigin){
+		$this->idFundOrigin = $idFundOrigin;
+	}
+		
+		
+	
 	public function jsonSerialize() {
 		return array($this->id,$this->name,$this->lastName,
 				$this->emailPerson,$this->dateRegister,$this->dateAllowOperation,
 				$this->username,$this->phone,$this->mobile,$this->idStatusPerson,
 				$this->acceptTerms,$this->birthDate,$this->address1,$this->address2,
 				$this->address3,$this->postalCode,$this->idCountry,
-				$this->idNationality,$this->idSex);
+				$this->idNationality,$this->idSex,$this->idOperationType,$this->idOcupation,
+				$this->idFundOrigin
+		);
 	}
 }
 ?>

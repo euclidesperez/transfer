@@ -61,14 +61,22 @@ body > header nav {
 	.logout				{ .has-icon("\f136"); }
 }
 
-button {
+button,
+a.action {
 	.has-icon;
 	.has-icon-size(@sz3);
 	.has-icon-margin(@sp1);
 
 	&.icon {
 		.has-icon-centered;
+		.has-icon-margin(0);
 	}
 
+	&.accept			{ .has-icon("\f26b"); }
 	&.add				{ .has-icon("\f278"); }
+	&.cancel			{ .has-icon("\f136"); }
+	&.delete			{ .has-icon("\f154"); }
+	&.google-login		{ .has-icon("\f34e"); }
+	&.fb-login			{ .has-icon("\f343"); }
+	&.save				{ .has-icon("\f297"); }
 }

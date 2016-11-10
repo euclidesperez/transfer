@@ -1,0 +1,170 @@
+<!doctype html>
+<html class="view-settings">
+<head>
+	<meta charset="utf-8">
+	<title>TransferUK</title>
+	<link rel="stylesheet" href="res/styles/style.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+	<header>
+		<h1>TransferUK</h1>
+		<nav>
+			<ul>
+				<li><a class="auction" href="index.html">Subasta</a></li>
+				<li><a class="settings" href="settings.html">Configuración</a></li>
+				<li><a class="logout" href="login.html">Salir</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<form class="dialog">
+			<header>
+				<h1>Perfil</h1>
+			</header>
+			<section class="content">
+				<div class="field">
+					<label>Nombre</label>
+					<input type="text" name="name">
+				</div>
+				<div class="field">
+					<label>E-mail</label>
+					<input type="email" name="email">
+				</div>
+				<div class="field">
+					<label>Teléfono</label>
+					<input type="text" name="phone">
+				</div>
+			</section>
+		</form>
+		<section class="list grid-list">
+			<header>
+				<h1>Documentos</h1>
+				<p></p>
+				<ul class="toolbar">
+					<li><button class="add icon" data-toggle="add-document-modal">Anexar</button></li>
+				</ul>
+			</header>
+			<div class="modal" id="add-document-modal">
+				<form class="dialog">
+					<header>
+						<h1>Anexar documento</h1>
+					</header>
+					<section class="content">
+						<div class="field-group">
+							<div class="field">
+								<label>Tipo</label>
+								<select name="type">
+									<option>Cédula</option>
+									<option>Pasaporte</option>
+								</select>
+							</div>
+							<div class="field">
+								<label>Imagen</label>
+								<input type="file" name="file" accept="image/*,application/pdf">
+							</div>
+						</div>
+					</section>
+					<footer>
+						<button class="save">Guardar</button>
+						<button type="reset" class="cancel">Cancelar</button>
+					</footer>
+				</form>
+			</div>
+			<div class="list-items">
+				<article class="document-item list-item">
+					<figure class="preview">
+						<a class="hotspot" href="#">
+							<img src="">
+						</a>
+					</figure>
+					<header>
+						<h1>Cédula</h1>
+					</header>
+					<ul class="toolbar">
+						<li><button class="delete icon" data-confirm="¿Está seguro de eliminar éste elemento?"></button></li>
+					</ul>
+				</article>
+			</div>
+		</section>
+		<section class="list table-list">
+			<header>
+				<h1>Cuentas Bancarias</h1>
+				<p></p>
+				<ul class="toolbar">
+					<li><button class="add icon" data-toggle="add-account-modal">Agregar</button></li>
+				</ul>
+			</header>
+			<div class="modal" id="add-account-modal">
+				<form class="dialog">
+					<header>
+						<h1>Agregar cuenta bancaria</h1>
+					</header>
+					<section class="content">
+						<div class="field-group">
+							<div class="field">
+								<label>Banco</label>
+								<input type="text" name="name" autofocus>
+							</div>
+							<div class="field">
+								<label>Código ABA</label>
+								<input type="text" name="aba">
+							</div>
+						</div>
+						<div class="field-group">
+							<div class="field">
+								<label>Número de cuenta</label>
+								<input type="text" name="code">
+							</div>
+							<div class="field">
+								<label>Titular de la cuenta</label>
+								<input type="text" name="owner">
+							</div>
+						</div>
+					</section>
+					<footer>
+						<button class="save">Guardar</button>
+						<button type="reset" class="cancel">Cancelar</button>
+					</footer>
+				</form>
+			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Banco</th>
+						<th class="optional number">Código ABA</th>
+						<th class="number">Cuenta</th>
+						<th class="optional">Titular</th>
+						<th class="actions"></th>
+					</tr>
+				</thead>
+				<tbody class="list-items">
+					<tr class="list-item">
+						<td>Bank of America</td>
+						<td class="optional number">123456789</td>
+						<td class="number">1234-5678-1234-5678</td>
+						<td class="optional">Emma María</td>
+						<td class="actions"><button class="delete icon">Eliminar</button></td>
+					</tr>
+					<tr class="list-item">
+						<td>Bank of America</td>
+						<td class="optional number">123456789</td>
+						<td class="number">1234-5678-1234-5678</td>
+						<td class="optional">Emma María</td>
+						<td class="actions"><button class="delete icon">Eliminar</button></td>
+					</tr>
+					<tr class="list-item">
+						<td>Bank of America</td>
+						<td class="optional number">123456789</td>
+						<td class="number">1234-5678-1234-5678</td>
+						<td class="optional">Emma María</td>
+						<td class="actions"><button class="delete icon">Eliminar</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+	<script src="res/scripts/lib/jquery.js"></script>
+	<script src="res/scripts/ui.js"></script>
+</body>
+</html>

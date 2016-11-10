@@ -1,11 +1,33 @@
 .list {
 	padding: @sp2;
 
-	header {
+	> header {
+		display: flex;
+		align-items: center;
 		.medium-header;
 
 		h1 {
 			.medium-title;
+
+			@media @mobile {
+				flex: 1 1 auto;
+			}
+		}
+
+		.toolbar {
+			margin-left: @sp4;
+		}
+	}
+
+	.list-item {
+		position: relative;
+
+		.title {
+			font-weight: bold;
+		}
+
+		.detail {
+			color: @text-color-mute;
 		}
 	}
 }
@@ -27,6 +49,13 @@
 		&.number {
 			text-align: right;
 		}
+
+		&.optional {
+
+			@media @mobile {
+				display: none;
+			}
+		}
 	}
 
 	tbody {
@@ -35,6 +64,54 @@
 
 			&:nth-child(odd) {
 				background-color: @area-color-stripe;
+			}
+		}
+	}
+}
+
+.grid-list {
+
+	.list-items {
+
+		@media @desktop {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+
+	.list-item {
+		box-sizing: border-box;
+		border-radius: 2px;
+		border: 1px solid @border-color;
+		overflow: hidden;
+
+		@media @desktop {
+			width: @sz10 * 2.5;
+		}
+
+		header {
+			height: @sz5;
+			line-height: @sz5;
+			padding: @sp1 @sp2;
+		}
+
+		figure {
+			height: @sz10;
+			background-color: @area-color-surface;
+		}
+
+		.toolbar {
+			position: absolute;
+			z-index: 1;
+			bottom: 0;
+			right: 0;
+			margin: @sp1;
+		}
+
+		@media @desktop {
+
+			&:not(:hover) .toolbar {
+				display: none;
 			}
 		}
 	}

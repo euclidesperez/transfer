@@ -3,6 +3,13 @@ html {
 	color: @text-color;
 }
 
+body {
+
+	@media @mobile {
+		margin-top: @sz8;
+	}
+}
+
 .width-wrapper {
 	margin: 0 auto;
 	max-width: 1280px;
@@ -13,12 +20,21 @@ body > header {
 	align-items: center;
 	box-sizing: border-box;
 	padding: @sp2;
-	//background-color: #f0f0f0;
+	background-color: #fff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 
 	@media @desktop {
 		height: @sz8;
 		padding-left: @sp4;
 		padding-right: @sp4;
+	}
+
+	@media @mobile {
+		position: fixed;
+		z-index: 100;
+		top: 0;
+		left: 0;
+		right: 0;
 	}
 
 	h1 {

@@ -12,3 +12,27 @@
 	.base-title;
 	font-size: @fn3;
 }
+
+.large-title() {
+	.base-title;
+	font-size: @fn4;
+	text-transform: none;
+}
+
+.hotspot {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 100%;
+
+	&:hover {
+
+		&::before {
+			content: "";
+			display: block;
+			.docked(absolute);
+			z-index: 1;
+			background-color: fade(@area-color-active, 50%);
+		}
+	}
+}

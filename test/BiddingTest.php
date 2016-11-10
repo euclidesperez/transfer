@@ -37,7 +37,7 @@ class BiddingTest extends PHPUnit_Framework_TestCase{
 	public function testListBiddingDAO(){
 		$dao = new BiddingDAO();
 		$lista = $dao->listBidding();
-		echo "count -----> ".count($lista);
+		//echo "count -----> ".count($lista);
 		$this->assertNotNull($lista,'Error en el listado');
 		$this->assertGreaterThan(0, count($lista));
 	}
@@ -54,16 +54,16 @@ class BiddingTest extends PHPUnit_Framework_TestCase{
 		
 		$dao = new BiddingDAO();
 		$bidding = $dao->getBidding(1);
-		echo "----- \n";
-		echo var_dump($bidding);
-		echo "----- \n"; 
+		//echo "----- \n";
+		//echo var_dump($bidding);
+		//echo "----- \n"; 
 		$newAmountAwared = 5000;
 		$bidding->setTotalAmountAwared($newAmountAwared);
-		echo $bidding->getTotalAmountAwared();
+		//echo $bidding->getTotalAmountAwared();
 		$dao->modify($bidding);
-		echo "\n";
+		//echo "\n";
 		$biddingUpdated = $dao->getBidding($bidding->getId());
-		echo serialize($biddingUpdated->getTotalAmountAwared());
+		//echo serialize($biddingUpdated->getTotalAmountAwared());
 		$this->assertNotSame($bidding, $biddingUpdated);
 		$this->assertNotSame($newAmountAwared, $biddingUpdated->getTotalAmountAwared());
 	}

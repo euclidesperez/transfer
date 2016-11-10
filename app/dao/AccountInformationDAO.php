@@ -68,6 +68,7 @@ class AccountInformationDAO extends Db{
 		FROM `transferuk`.`accountinformation`
 		WHERE `accountinformation`.`idAccountInformation` = ".$this->quote($idAccount)." and
 				`status` = 'A'";
+		
 		$rows = $this->select($query);
 		$object = new AccountInformation();
 		foreach ($rows as $row){
@@ -85,6 +86,42 @@ class AccountInformationDAO extends Db{
 		return $object;
 	}
 	
+	public function getAccountInformationSameUser(AccountInformation $account){
+		$query = "SELECT `accountinformation`.`idAccountInformation`,
+		    `accountinformation`.`bankName`,
+		    `accountinformation`.`codeABASort`,
+		    `accountinformation`.`numberAccount`,
+		    `accountinformation`.`accountHolder`,
+		    `accountinformation`.`address`,
+		    `accountinformation`.`idPerson`,
+		    `accountinformation`.`idAccountType`,
+		    `accountinformation`.`status`
+		FROM `transferuk`.`accountinformation`
+		WHERE `accountinformation`.`idPerson` = ".$this->quote($account->getIdPerson())." and
+		      `accountinformation`.`numberAccount` = ".$this->quote($account->getNumberAccount())." and 
+		      		`status` = 'A'";
+		$rows = $this->select($query);
+		
+		foreach ($rows as $row){
+			$object = new AccountInformation();
+			$object->setId($row['idAccountInformation']);
+			$object->setAccountHolder($row['accountHolder']);
+			$object->setAddress($row['address']);
+			$object->setBankName($row['bankName']);
+			$object->setCodeAba($row['codeABASort']);
+			$object->setIdPerson($row['idPerson']);
+			$object->setNumberAccount($row['numberAccount']);
+			$object->setIdAccountType($row['idAccountType']);
+			$object->setStatus($row['status']);
+		}
+		unset($row);
+		if(isset($object)){
+			return $object;
+		}else{
+			return null;
+		}
+		
+	}
 	
 	public function listAccountInformation($idUsuarios){
 		$query = "SELECT `accountinformation`.`idAccountInformation`,

@@ -7,19 +7,23 @@ require_once "app/oop/Country.php";
 class PersonDAO extends Db {
 	public function register(Person $person) {
 		$query = "INSERT INTO `transferuk`.`person`
-			(`name`,`lastName`,	`emailPerson`,
-			`username`,	`phone`, `mobile`, `birthDate`,
-			`address1`, `address2`, `address3`, `postalCode`, `idCountry`, `idNationality`, `idSex`)
+			(`name`, `lastName`, `emailPerson`,`dateRegister`,
+				`username`, `phone`, `mobile`,
+				`acceptTerms`, `birthDate`, `address1`,
+				`address2`, `address3`, `postalCode`, `idCountry`,
+				`idNationality`, `idSex`, `idOcupation`, `idFundOrigin`,
+				`idOperationType`)	
 			VALUES
 			(" . $this->quote ( $person->getName () ) . ", " . $this->quote ( $person->getLastName () ) . ",
-			" . $this->quote ( $person->getEmailPerson () ) . ", 
+			" . $this->quote ( $person->getEmailPerson () ) . ", " . $this->quote (date("Y-m-d") ) . ",
 			" . $this->quote ( $person->getUsername () ) . ",
 			" . $this->quote ( $person->getPhone () ) . ", " . $this->quote ( $person->getMobile () ) . ", 
-			" . $this->quote ( $person->getBirthDate () ) . ",
+			" . $this->quote ( $person->getAcceptTerms() ) . "," . $this->quote ( $person->getBirthDate () ) . ",
 			" . $this->quote ( $person->getAddress1 () ) . "," . $this->quote ( $person->getAddress2 () ) . ",
 			" . $this->quote ( $person->getAddress3 () ) . ", " . $this->quote ( $person->getPostalCode () ) . ", 
 			" . $this->quote ( $person->getIdCountry () ) . "," . $this->quote ( $person->getIdNationality () ) . ", 
-			" . $this->quote ( $person->getIdSex () ) .  ")";
+			" . $this->quote ( $person->getIdSex () ) ."," .$this->quote($person->getIdOcupation()) .",
+			" . $this->quote ( $person->getIdFundOrigin()).",".$this->quote($person->getIdOperationType()).")";
 		
 		$lastId = $this->insert ( $query );
 		
@@ -48,7 +52,10 @@ class PersonDAO extends Db {
 				`postalCode` = " . $this->quote ( $person->getPostalCode () ) . ",
 				`idCountry` = " . $this->quote ( $person->getIdCountry () ) . ",
 				`idNationality` = " . $this->quote ( $person->getIdNationality () ) . ",
-				`idSex` = " . $this->quote ( $person->getIdSex () ) . "  ;
+				`idSex` = " . $this->quote ( $person->getIdSex () ) . ",
+				`idOcupation` = " . $this->quote ( $person->getIdOcupation() ) . ",  
+				`idOperationType` = " . $this->quote ( $person->getIdOperationType() ) . ", 
+				`idFundOrigin` = " . $this->quote ( $person->getIdFundOrigin() ) . "  						
 				WHERE `idPerson` = " . $this->quote ( $idPerson );
 		$result = $this->query ( $query );
 		if ($result === false) {
@@ -64,25 +71,28 @@ class PersonDAO extends Db {
 		}
 	}
 	public function getPerson($idPerson) {
-		$query = "SELECT `person`.`idPerson`,
-		    `person`.`name`,
-		    `person`.`lastName`,
-		    `person`.`emailPerson`,
-		    `person`.`dateRegister`,
-		    `person`.`dateAllowOperation`,
-		    `person`.`username`,
-		    `person`.`phone`,
-		    `person`.`mobile`,
-		    `person`.`idStatusPersons`,
-		    `person`.`acceptTerms`,
-		    `person`.`birthDate`,
-		    `person`.`address1`,
-		    `person`.`address2`,
-		    `person`.`address3`,
-		    `person`.`postalCode`,
-		    `person`.`idCountry`,
-		    `person`.`idNationality`,
-		    `person`.`idSex`
+		$query = "SELECT  `person`.`idPerson`,
+    `person`.`name`,
+    `person`.`lastName`,
+    `person`.`emailPerson`,
+    `person`.`dateRegister`,
+    `person`.`dateAllowOperation`,
+    `person`.`username`,
+    `person`.`phone`,
+    `person`.`mobile`,
+    `person`.`idStatusPersons`,
+    `person`.`acceptTerms`,
+    `person`.`birthDate`,
+    `person`.`address1`,
+    `person`.`address2`,
+    `person`.`address3`,
+    `person`.`postalCode`,
+    `person`.`idCountry`,
+    `person`.`idNationality`,
+    `person`.`idSex`,
+    `person`.`idOcupation`,
+    `person`.`idFundOrigin`,
+    `person`.`idOperationType`
 		FROM `transferuk`.`person`
 		WHERE `idPerson` = " . $this->quote ( $idPerson );
 		
@@ -108,11 +118,78 @@ class PersonDAO extends Db {
 			$object->setIdCountry ( $row ['idCountry'] );
 			$object->setIdNationality ( $row ['idNationality'] );
 			$object->setIdSex ( $row ['idSex'] );
+			$object->setIdOcupation( $row ['idOcupation'] );
+			$object->setIdFundOrigin( $row ['idFundOrigin'] );
+			$object->setIdOperationType( $row ['idOperationType'] );
+			
 		}
 		unset ( $row );
 		
 		return $object;
 	}
+	
+	public function getPersonByEmail(Person $person) {
+		$query = "SELECT  `person`.`idPerson`,
+    `person`.`name`,
+    `person`.`lastName`,
+    `person`.`emailPerson`,
+    `person`.`dateRegister`,
+    `person`.`dateAllowOperation`,
+    `person`.`username`,
+    `person`.`phone`,
+    `person`.`mobile`,
+    `person`.`idStatusPersons`,
+    `person`.`acceptTerms`,
+    `person`.`birthDate`,
+    `person`.`address1`,
+    `person`.`address2`,
+    `person`.`address3`,
+    `person`.`postalCode`,
+    `person`.`idCountry`,
+    `person`.`idNationality`,
+    `person`.`idSex`,
+    `person`.`idOcupation`,
+    `person`.`idFundOrigin`,
+    `person`.`idOperationType`
+		FROM `transferuk`.`person`
+		WHERE `emailPerson` = " . $this->quote ( $person->getEmailPerson() );
+		$rows = $this->query ( $query );
+		
+		foreach ( $rows as $row ) {
+			$object = new Person ();
+			$object->setId ( $row ['idPerson'] );
+			$object->setName ( $row ['name'] );
+			$object->setLastName ( $row ['lastName'] );
+			$object->setEmailPerson ( $row ['emailPerson'] );
+			$object->setDateRegister ( $row ['dateRegister'] );
+			$object->setDateAllowOperation ( $row ['dateAllowOperation'] );
+			$object->setUsername ( $row ['username'] );
+			$object->setPhone ( $row ['phone'] );
+			$object->setMobile ( $row ['mobile'] );
+			$object->setIdStatusPerson ( $row ['idStatusPersons'] );
+			$object->setAcceptTerms ( $row ['acceptTerms'] );
+			$object->setBirthDate ( $row ['birthDate'] );
+			$object->setAddress1 ( $row ['address1'] );
+			$object->setAddress2 ( $row ['address2'] );
+			$object->setAddress3 ( $row ['address3'] );
+			$object->setPostalCode ( $row ['postalCode'] );
+			$object->setIdCountry ( $row ['idCountry'] );
+			$object->setIdNationality ( $row ['idNationality'] );
+			$object->setIdSex ( $row ['idSex'] );
+			$object->setIdOcupation( $row ['idOcupation'] );
+			$object->setIdFundOrigin( $row ['idFundOrigin'] );
+			$object->setIdOperationType( $row ['idOperationType'] );
+				
+		}
+		unset ( $row );
+		if(isset($object)){
+			return $object;
+		}else{
+			return null;
+		}
+		
+	}
+	
 	public function getPersons() {
 		$query = "SELECT `person`.`idPerson`,
 		    `person`.`name`,
@@ -158,6 +235,9 @@ class PersonDAO extends Db {
 			$object->setIdCountry ( $row ['idCountry'] );
 			$object->setIdNationality ( $row ['idNationality'] );
 			$object->setIdSex ( $row ['idSex'] );
+			$object->setIdOcupation( $row ['idOcupation'] );
+			$object->setIdFundOrigin( $row ['idFundOrigin'] );
+			$object->setIdOperationType( $row ['idOperationType'] );
 			array_push ( $list, $object );
 		}
 		unset ( $row );
@@ -172,6 +252,22 @@ class PersonDAO extends Db {
 		$query = "SELECT `statusperson`.`id`, `statusperson`.`description` FROM `transferuk`.`statusperson`";
 		return $this->getCatalog ( $query );
 	}
+	
+	public function getOcupationCatalog(){
+		$query="SELECT `ocupation`.`id`,`ocupation`.`description` FROM `transferuk`.`ocupation`";
+		return $this->getCatalog($query);
+	}
+	
+	public function getFundOrigin(){
+		$query = "SELECT `fundorigin`.`id`,`fundorigin`.`description` FROM `transferuk`.`fundorigin`";
+		return $this->getCatalog($query);
+	}
+	
+	public function getOperationType(){
+		$query = "SELECT `operationtype`.`id`,`operationtype`.`description` FROM `transferuk`.`operationtype`";
+		return $this->getCatalog($query);
+	}
+	
 	public function getCountryCatalog() {
 		$query = "SELECT `country`.`id`,
     		`country`.`countryCode`,

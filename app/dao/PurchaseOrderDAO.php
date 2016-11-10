@@ -76,6 +76,40 @@ class PurchaseOrderDAO extends Db {
 		unset ( $row );
 		return $listPurchaseOrder;
 	}
+	public function getPurchaseDuplicated(PurchaseOrder $order){
+		$query = "SELECT `purchaseorder`.`idPurchaseOrder`,
+		    `purchaseorder`.`dateOrder`,
+		    `purchaseorder`.`amountOrder`,
+		    `purchaseorder`.`statusOrder`,
+		    `purchaseorder`.`priceOrder`,
+		    `purchaseorder`.`idBidding`,
+		    `purchaseorder`.`idPerson`
+				FROM `transferuk`.`purchaseorder`
+				WHERE `purchaseorder`.`dateOrder` = ".$this->quote($order->getDateOrder())." 
+				and `purchaseorder`.`priceOrder` = ".$this->quote($order->getPriceOrder())." 
+				and `purchaseorder`.`amountOrder` = ".$this->quote($order->getAmountOrder())." 
+				and `purchaseorder`.`idPerson` = ".$this->quote($order->getIdPerson())." 
+				and `purchaseorder`.`idBidding` = ".$this->quote($order->getIdBidding());
+		$rows = $this->select ( $query );
+		
+		foreach ( $rows as $row ) {
+			$object = new PurchaseOrder();
+			$object->setId ( $row ['idPurchaseOrder'] );
+			$object->setIdBidding ( $row ['idBidding'] );
+			$object->setIdPerson ( $row ['idPerson'] );
+			$object->setPriceOrder ( $row ['priceOrder'] );
+			$object->setDateOrder ( $row ['dateOrder'] );
+			$object->setAmountOrder ( $row ['amountOrder'] );
+			$object->setStatusOrder ( $row ['statusOrder'] );
+		}
+		unset ( $row );
+		if(isset($object)){
+			return $object;
+		}else{
+			return null;
+		}
+	}
+	
 	public function getPurchase($idPurchase) {
 		$query = "SELECT `purchaseorder`.`idPurchaseOrder`,
 		    `purchaseorder`.`dateOrder`,

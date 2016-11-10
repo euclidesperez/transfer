@@ -1,0 +1,74 @@
+.view-login {
+
+	body {
+		position: relative;
+		background-color: @area-color-surface;
+	}
+
+	form {
+		max-width: 350px;
+		padding: @sp4;
+
+		h1 {
+			.large-title;
+		}
+
+		footer {
+			margin-top: @sp2;
+
+			button,
+			.login {
+				width: 100%;
+			}
+
+			nav {
+				margin-top: @sp2;
+				padding-top: @sp2;
+				border-top: 1px solid @border-color-light;
+
+				li + li {
+					margin-top: @sp1;
+				}
+			}
+
+			.login {
+				height: auto;
+				padding: @sp2;
+				.has-icon-margin(@sp2);
+			}
+
+			.fb-login {
+				.action-colors(#3b5998);
+			}
+
+			.google-login {
+				.action-colors(#d62d20);
+			}
+		}
+	}
+
+	@media @desktop {
+
+		form {
+			margin: @sp5 auto @sp4;
+			border-radius: 3px;
+			border: 1px solid @border-color;
+			background-color: @area-color-empty;
+		}
+
+		body > footer {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+	}
+
+	@media @mobile {
+
+		body {
+			margin: 0;
+			background-color: @area-color-empty;
+		}
+	}
+}

@@ -20,9 +20,12 @@ class PersonTest extends PHPUnit_Framework_TestCase{
 		$person->setDateRegister(date("Y-m-d"));
 		$person->setDateAllowOperation(date("Y-m-d"));
 		$person->setBirthDate(date("Y-m-d"));
-		var_dump($person);
+		$person->setIdOperationType(1);
+		$person->setIdOcupation(1);
+		$person->setIdFundOrigin(1);
+		//var_dump($person);
 		$lastId = $dao->register($person);
-		var_dump($lastId);
+		//var_dump($lastId);
 		$this->assertNotNull($lastId);
 		$consult = $dao->getPerson($lastId);
 		$this->assertNotNull($consult);

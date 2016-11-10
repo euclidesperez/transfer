@@ -7,10 +7,9 @@ class BiddingDAO extends Db{
 	
 	public function register(Bidding $bidding){
 		$query  = "INSERT INTO `transferuk`.`bidding`
-				(`dateInit`, `dateEnd`, `totalAmountOffered`, `totalAmountAwared`,
-				`statusBidding`) VALUES (". $this->quote($bidding->getDateInit()) .","
+				(`dateInit`, `dateEnd`, `totalAmountOffered`, `totalAmountAwared`) VALUES (". $this->quote($bidding->getDateInit()) .","
 						. $this->quote($bidding->getDateEnd()) .", ".$this->quote($bidding->getTotalAmountOffered()).", "
-								.$this->quote($bidding->getTotalAmountAwared()).",".$this->quote($bidding->getStatus()).")";
+								.$this->quote($bidding->getTotalAmountAwared()).")";
 		$lastId = $this->insert($query);
 		
 		if($lastId <= 0){			
@@ -61,6 +60,31 @@ class BiddingDAO extends Db{
 		}
 		unset ( $row );				
 		return $object;
+	}
+	
+	public function getBiddingSameDate(Bidding $bid){
+		$query = "SELECT `bidding`.`idBidding`,`bidding`.`dateInit`, `bidding`.`dateEnd`,
+				`bidding`.`totalAmountOffered`,`bidding`.`totalAmountAwared`,
+				`bidding`.`statusBidding` FROM `transferuk`.`bidding`
+				where `bidding`.`dateEnd`  =".$this->quote($bid->getDateEnd())."
+						 and `bidding`.`statusBidding` = 'A'" ;		
+		$rows = $this->select($query);		
+		foreach ( $rows as $row ) {
+			$object = new Bidding();
+			$object->setId ( $row ['idBidding'] );
+			$object->setDateEnd ( $row ['dateEnd'] );
+			$object->setDateInit ( $row ['dateInit'] );
+			$object->setStatus ( $row ['statusBidding'] );
+			$object->setTotalAmountAwared ( $row ['totalAmountAwared'] );
+			$object->setTotalAmountOffered ( $row ['totalAmountOffered'] );
+		}
+		unset ( $row );
+		if(isset($object)){
+			return $object;
+		}else{
+			return null;
+		}
+		
 	}
 	
 	public function listBidding(){

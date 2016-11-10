@@ -7,6 +7,21 @@
 	}
 }
 
+.field-group {
+
+	@media @desktop {
+		display: flex;
+
+		.field {
+			flex: 1 1 auto;
+
+			+ .field {
+				margin-left: @sp4;
+			};
+		}
+	}
+}
+
 .dialog {
 
 	header {
@@ -19,6 +34,10 @@
 
 	@media @desktop {
 		padding: @sp4;
+
+		footer {
+			text-align: right;
+		}
 	}
 
 	@media @mobile {

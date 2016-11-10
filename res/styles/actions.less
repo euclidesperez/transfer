@@ -21,11 +21,11 @@
 	.action-color(@bg);
 
 	&:focus {
-		.action-color(lighten(@bg, 10%));
+		.action-color(lighten(@bg, 5%));
 	}
 
 	&:hover {
-		.action-color(lighten(@bg, 20%));
+		.action-color(lighten(@bg, 10%));
 	}
 
 	&:active {
@@ -36,18 +36,39 @@
 .action-base() {
 	.action-frame;
 	.action-colors(@area-color-active);
+	display: inline-block;
 	box-sizing: border-box;
 	height: @sz5;
+	line-height: @sz5;
 	font: inherit;
 	font-size: @fn1;
 	text-transform: uppercase;
+	text-align: center;
 
 	&:active {
 		transform: translateY(1px);
 	}
 }
 
+.action-icon() {
+	text-indent: -10000px;
+	overflow: hidden;
+}
+
 button,
 a.action {
 	.action-base;
+
+	&.icon {
+		.action-icon;
+	}
+
+	&.accept,
+	&.save {
+		.action-colors(@action-color-main);
+	}
+
+	&.delete {
+		.action-colors(@action-color-critical);
+	}
 }
