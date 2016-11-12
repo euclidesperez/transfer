@@ -1,0 +1,46 @@
+<!doctype html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml" class="view-login">
+<head>
+	<meta charset="utf-8">
+	<title>TransferUK</title>
+	<link rel="stylesheet" href="res/styles/style.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.8&appId=168246420290518";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+	<form method="post" action="">
+		<header>
+			<h1>Bienvenido</h1>
+		</header>
+		<section class="content">
+			<div class="field">
+				<label>Usuario/Email</label>
+				<input type="text" name="username">
+			</div>
+			<div class="field">
+				<label>Contraseña</label>
+				<input type="password" name="password">
+			</div>
+		</section>
+		<footer>
+			<button>Entrar</button>
+			<nav>
+				<ul>
+					<li><a class="action login fb-login" href="fbconfig.php">Entrar con Facebook</a></li>
+					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+					</fb:login-button>
+				</ul>
+			</nav>
+		</footer>
+	</form>
+	<footer>
+		<p>&copy; 2016</p>
+	</footer>
+</body>
+</html>

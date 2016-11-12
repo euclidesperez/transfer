@@ -63,16 +63,21 @@ class RegisterTest extends PHPUnit_Framework_TestCase{
 				['form_params' => $data]);
 		$this->testPostResponse($response);
 	}
-	/* 
+	 
 	public function testDocumentRegister(){
 	
 		// create our http client (Guzzle)
 		$client = new GuzzleHttp\Client(['base_uri'=>'http://localhost']);
 		$data['name'] = "prueba";
-		$response = $client->post('/register.php?option=user',['body' => json_encode($data)]);
-		$this->testGetResponse($response);
+		$data['name'] = "prueba";
+		$data['name'] = "prueba";
+		$data['name'] = "prueba";
+		$response = $client->request('POST',
+				'/register.php?option=document',
+				['form_params' => $data]);
+		$this->testPostResponse($response);
 	}
-	*/
+	
 	public function testOperationRegister(){
 	
 // 	create our http client (Guzzle)

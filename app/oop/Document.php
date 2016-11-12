@@ -4,6 +4,7 @@ class Document implements JsonSerializable{
 	private $type;
 	private $idPerson;
 	private $document;
+	private $name;
 	
 	public function getId(){
 		return $this->id;
@@ -37,8 +38,15 @@ class Document implements JsonSerializable{
 		$this->document = $document;
 	}
 	
+	public function getName(){
+		return $this->name;
+	}
+	
+	public function setName($name){
+		$this->name = $name;
+	}
 public function jsonSerialize() {
-		return array($this->id,$this->type,$this->idPerson,$this->document);
+		return array($this->id,$this->name,$this->type,$this->idPerson,$this->document);
 	}
 
 }
