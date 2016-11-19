@@ -1,5 +1,13 @@
 .list {
-	padding: @sp2;
+	position: relative;
+
+	@media @desktop {
+		padding: @sp4;
+	}
+
+	@media @mobile {
+		padding: @sp2;
+	}
 
 	> header {
 		display: flex;
@@ -8,10 +16,7 @@
 
 		h1 {
 			.medium-title;
-
-			@media @mobile {
-				flex: 1 1 auto;
-			}
+			flex: 1 1 auto;
 		}
 
 		.toolbar {
@@ -30,6 +35,60 @@
 			color: @text-color-mute;
 		}
 	}
+
+	&.has-detail-view {
+
+		&:not(.open-detail-view) {
+
+			.detail-view {
+				display: none;
+			}
+		}
+
+		@media @desktop {
+
+			> .wrapper {
+				display: flex;
+				width: 100%;
+				overflow: hidden;
+
+				.list-container {
+					flex: 1 1 auto;
+					width: auto;
+				}
+
+				.detail-view {
+					flex: 0 0 auto;
+				}
+			}
+
+		}
+
+		&.open-detail-view {
+
+			.detail-view {
+				.modal-dialog;
+			}
+
+			@media @desktop {
+
+				.detail-view {
+					margin: @sp1 @sp1 @sp1 @sp4;
+					box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+					animation: slide-left 400ms;
+				}
+			}
+
+			@media @mobile {
+
+				.detail-view {
+					.docked(fixed);
+					z-index: 10;
+					animation: slide-up 400ms;
+				}
+			}
+		}
+	}
 }
 
 .table-list {
@@ -44,7 +103,9 @@
 		padding: @sp1 @sp2;
 		text-align: left;
 
-		&.date {}
+		&.date {
+			text-align: center;
+		}
 
 		&.number {
 			text-align: right;
@@ -55,6 +116,11 @@
 			@media @mobile {
 				display: none;
 			}
+		}
+
+		&.actions {
+			width: 1px;
+			white-space: nowrap;
 		}
 	}
 
@@ -87,6 +153,7 @@
 
 		@media @desktop {
 			width: @sz10 * 2.5;
+			max-width: 40%;
 		}
 
 		header {

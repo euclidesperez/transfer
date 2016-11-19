@@ -1,0 +1,36 @@
+@import "vars";
+@import "mixins";
+
+@import "fonts";
+@import "reset";
+
+@import "patterns";
+@import "icons";
+@import "actions";
+
+main.std-section {
+
+	@media @mobile {
+		margin-top: @sz8;
+
+		h1, h2 {
+			text-align: left;
+		}
+	}
+
+	h1 {
+		margin-bottom: @sp2;
+
+		@media @mobile {
+			font-size: 180%;
+		}
+	}
+
+	h2 {
+		margin-bottom: @sp5;
+
+		@media @mobile {
+			font-size: 100%;
+		}
+	}
+}

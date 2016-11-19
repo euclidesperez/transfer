@@ -85,6 +85,14 @@
 .summary {
 	background-color: @area-color-surface;
 
+	h1 {
+		.medium-title;
+		margin: 0 @sp1 @sp1;
+		line-height: @sz8;
+		text-align: center;
+		border-bottom: 1px solid @border-color;
+	}
+
 	.indicator {
 		.indicator-colors(@area-color-surface);
 	}
@@ -94,9 +102,18 @@
 
 	> * {
 		display: inline-block;
+		vertical-align: middle;
 
 		> * {
 			display: block;
+		}
+	}
+
+	@media @mobile {
+
+		button,
+		.action {
+			.action-icon;
 		}
 	}
 }

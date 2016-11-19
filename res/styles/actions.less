@@ -51,8 +51,25 @@
 }
 
 .action-icon() {
+	.has-icon-centered;
+	.has-icon-margin(0);
+	width: @sz5;
 	text-indent: -10000px;
 	overflow: hidden;
+}
+
+.action-fluid() {
+	height: auto;
+	line-height: normal;
+	padding: @sp2 @sp4;
+}
+
+.action-main() {
+	.action-colors(@action-color-main);
+}
+
+.action-critical() {
+	.action-colors(@action-color-critical);
 }
 
 button,
@@ -63,12 +80,14 @@ a.action {
 		.action-icon;
 	}
 
+	&.main-action,
 	&.accept,
 	&.save {
-		.action-colors(@action-color-main);
+		.action-main;
 	}
 
+	&.critical-action,
 	&.delete {
-		.action-colors(@action-color-critical);
+		.action-critical;
 	}
 }

@@ -16,6 +16,7 @@ body {
 }
 
 body > header {
+	z-index: 5;
 	display: flex;
 	align-items: center;
 	box-sizing: border-box;
@@ -24,6 +25,7 @@ body > header {
 	box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 
 	@media @desktop {
+		position: relative;
 		height: @sz8;
 		padding-left: @sp4;
 		padding-right: @sp4;
@@ -31,7 +33,6 @@ body > header {
 
 	@media @mobile {
 		position: fixed;
-		z-index: 100;
 		top: 0;
 		left: 0;
 		right: 0;
@@ -103,4 +104,47 @@ body > footer {
 
 main {
 
+	> nav {
+		background-color: @area-color-active;
+		color: #fff;
+
+		ul {
+			display: flex;
+		}
+
+		li {
+			flex: 1 1 auto;
+		}
+
+		a {
+			display: block;
+			position: relative;
+			line-height: @sz6;
+			color: inherit;
+			text-align: center;
+			text-decoration: none;
+			text-transform: uppercase;
+
+			@media @mobile {
+				font-size: @fn0;
+			}
+
+			&.current {
+				font-weight: bold;
+
+				@s: 5px;
+
+				&::after {
+					content: "";
+					display: block;
+					position: absolute;
+					bottom: 0;
+					left: 50%;
+					margin-left: -@s;
+					border: @s solid transparent;
+					border-bottom-color: @border-color-inv;
+				}
+			}
+		}
+	}
 }

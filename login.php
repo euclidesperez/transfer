@@ -20,6 +20,10 @@
 				<label>Contraseña</label>
 				<input type="password" name="password">
 			</div>
+			<div class="field">
+				<label>Confirmacion Contraseña</label>
+				<input type="password" name="repassword">
+			</div>
 		</section>
 		<footer>
 			<button>Entrar</button>
@@ -27,9 +31,12 @@
 				<ul>
 					<!--
 					<li><a class="action login fb-login" href="<?php echo $loginUrl?>">Entrar con Facebook</a></li>
-					-->
-					<?php include 'fb-buttonLogin.php';?>
 					<li><a class="action login google-login">Entrar con Google</a></li>
+					-->
+					<?php session_start();?>
+					<?php include 'login/fb-button.php';?>
+					<?php include 'login/gp-button.php';?>
+					
 				</ul>
 			</nav>
 		</footer>

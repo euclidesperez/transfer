@@ -1,9 +1,21 @@
 .field {
 	padding: @sp2 0;
 
-	label {
+	> label {
 		display: block;
 		margin-bottom: @sp2;
+	}
+
+	ul {
+
+		li {
+			display: inline-block;
+			line-height: @sz5;
+
+			+ li {
+				margin-left: 1em;
+			}
+		}
 	}
 }
 
@@ -23,6 +35,8 @@
 }
 
 .dialog {
+	display: flex;
+	flex-direction: column;
 
 	header {
 		.medium-header;
@@ -32,10 +46,15 @@
 		.medium-title;
 	}
 
+	.content {
+		flex: 1 1 auto;
+	}
+
 	@media @desktop {
 		padding: @sp4;
 
 		footer {
+			margin-top: @sp2;
 			text-align: right;
 		}
 	}
@@ -55,6 +74,11 @@
 
 	&.hilited {
 		background-color: saturate(darken(@area-color-surface, 5%), 10%);
+	}
+
+	.list {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
@@ -100,5 +124,14 @@
 				flex: 1 1 auto;
 			}
 		}
+	}
+}
+
+form.compact {
+	display: flex;
+	align-items: center;
+
+	> * + * {
+		margin-left: @sp1;
 	}
 }

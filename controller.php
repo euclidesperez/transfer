@@ -6,9 +6,10 @@ $uri = $_SERVER ['REQUEST_URI'];
 $tipo = "application/json";
 header($tipo);
 if ($uri == 'controller.php') {
-	header('Location: index.html');
+	header('Location: landing.html');
 	exit;
-	
+} elseif (strstr($uri, 'login.do')) {
+	header('Location: login.php');
 } elseif (strstr($uri, 'provisioning.do') || strstr($uri, 'provisioning.php') ) {
 	$catalog = loadCatalog($_GET);
 	
